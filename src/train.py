@@ -111,8 +111,8 @@ def training_pipeline():
     model_accuracy = accuracy_score(dataset_labels, model_predictions)
     model_f1_score = f1_score(dataset_labels, model_predictions, average='weighted')
 
-    print(f'Accuracy Score: {model_accuracy:.4f}')
-    print(f'F1 Score: {model_f1_score:.4f}')
+    print(f'Accuracy score: {model_accuracy:.4f}')
+    print(f'F1-Score: {model_f1_score:.4f}')
 
     # Save trained model, tokenizer and performance metrics
 
