@@ -22,11 +22,8 @@ PREDICTION_LATENCY = Histogram(
     'model_request_duration_seconds',
     'Time spent processing the inference request')
 
-# Select source based on environment mode
-if os.path.isdir('./src/sentiment_analysis_model'):
-    MODEL_SOURCE = './src/sentiment_analysis_model'
-else:
-    MODEL_SOURCE = 'cardiffnlp/twitter-roberta-base-sentiment-latest'
+# Select model source
+MODEL_SOURCE = 'MRDS98/online-company-reputation'
 
 classifier = AutoModelForSequenceClassification.from_pretrained(MODEL_SOURCE)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_SOURCE)
