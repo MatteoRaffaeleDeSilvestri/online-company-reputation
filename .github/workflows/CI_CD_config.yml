@@ -58,5 +58,5 @@ jobs:
           HF_USER: MRDS98
           HF_SPACE: online-company-reputation
         run: |
-          git remote add hf "https://${{env.HF_USER}}:${{env.HF_TOKEN}}@huggingface.co/spaces/${{env.HF_USER}}/${{env.HF_SPACE}}"
+          git remote add hf "https://${{env.HF_USER}}:${{env.HF_TOKEN}}@huggingface.co/${{env.HF_USER}}/${{env.HF_SPACE}}"
           git push -f hf main
