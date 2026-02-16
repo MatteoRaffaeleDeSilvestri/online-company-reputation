@@ -53,8 +53,11 @@ jobs:
     if: success()
 
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
 
       - name: Push on Git
         run: |
