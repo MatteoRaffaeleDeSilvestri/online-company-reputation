@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from main import app
+from src.main import app
 
 client = TestClient(app)
 
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # Negative review test
     negative_txt = 'The instruction manual was incredibly confusing and lacked several crucial steps'
     negative_eval = test_sentiment_analysis(negative_txt)
-    
+
     print(f'Sentiment analysis results for input: "{negative_txt}"')
     for i in negative_eval:
         print(f"- {i['label']}: {i['score']:.4f}")
