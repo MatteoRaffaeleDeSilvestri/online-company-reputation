@@ -5,15 +5,19 @@ from src.main import app
 if __name__ == '__main__':
 
     client = TestClient(app)
- 
-    sentiment_eval = test_sentiment_analysis('This product works exactly as advertised and has significantly simplified my daily routine')
+
+    # Positive review test
+    positive_text = 'This product works exactly as advertised and has significantly simplified my daily routine'
+    sentiment_eval = test_sentiment_analysis(positive_text)
     
-    print(f'Sentiment analysis results for input: "{txt}"')
+    print(f'Sentiment analysis results for input: "{positive_text}"')
     for i in sentiment_eval:
         print(f"- {i['label']}: {i['score']:.4f}")
 
-    sentiment_eval = test_sentiment_analysis('The instruction manual was incredibly confusing and lacked several crucial steps')
+    # Negative review test
+    negative_text = 'The instruction manual was incredibly confusing and lacked several crucial steps'
+    sentiment_eval = test_sentiment_analysis(negative_text)
 
-    print(f'Sentiment analysis results for input: "{txt}"')
+    print(f'Sentiment analysis results for input: "{negative_text}"')
     for i in sentiment_eval:
         print(f"- {i['label']}: {i['score']:.4f}")
