@@ -3,7 +3,7 @@ from main import app
 
 client = TestClient(app)
 
-def CI_test_sentiment_analysis():
+def test_sentiment_analysis():
     
     data = {'text': 'This product works exactly as advertised and has significantly simplified my daily routine'}
     response = client.post('/analize', json = data)
