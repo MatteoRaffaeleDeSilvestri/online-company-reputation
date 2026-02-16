@@ -1,10 +1,25 @@
-from src.test import test_sentiment_analysis
 from fastapi.testclient import TestClient
-from src.main import app
+from main import app
+
+client = TestClient(app)
+
+def test_sentiment_analysis(txt):
+
+    data = {'text': txt}
+    response = client.post('/analyze', json=data)
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+    
+    for item in response.json():
+        assert 'label' in item
+        assert 'score' in item
+        assert isinstance(item['label'], str)
+        assert isinstance(item['score'], float)
+    
+    return response.json()
 
 if __name__ == '__main__':
-
-    client = TestClient(app)
 
     # Positive review test
     positive_text = 'This product works exactly as advertised and has significantly simplified my daily routine'
