@@ -30,9 +30,9 @@ if __name__ == '__main__':
         print(f"- {i['label']}: {i['score']:.4f}")
 
     # Negative review test
-    negative_eval = test_sentiment_analysis(negative_txt)
     negative_txt = 'The instruction manual was incredibly confusing and lacked several crucial steps'
-
+    negative_eval = test_sentiment_analysis(negative_txt)
+    
     print(f'Sentiment analysis results for input: "{negative_txt}"')
     for i in negative_eval:
         print(f"- {i['label']}: {i['score']:.4f}")
