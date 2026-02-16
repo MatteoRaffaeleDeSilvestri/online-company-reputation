@@ -16,5 +16,5 @@ for item in response.json():
     assert isinstance(item['score'], float)
     
 print(f'Sentiment analysis results for input: "{data['text']}"')
-for i in sentiment_eval:
+for i in response.json():
     print(f"- {i['label']}: {i['score']:.4f}")
