@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    container_name: app
+    restart: unless-stopper
+    ports:
+      - "8000:8000"
+  monitor:
+    image: grafana/grafana-oss:latest
+    container_name: monitor
+    restart: unless-stopper
+    ports:
+      - "3000:3000"
