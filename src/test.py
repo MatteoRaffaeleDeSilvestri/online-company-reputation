@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 from main import app
 import pytest
 
+# Start app
 client = TestClient(app)
 
 @pytest.mark.parametrize('txt', [
@@ -10,6 +11,7 @@ client = TestClient(app)
     'I was impressed by how intuitive the setup process was right out of the box',
     'For the premium price they charge, the materials feel remarkably cheap and flimsy'])
 
+# Test function for sentiment analysis
 def test_sentiment_analysis(txt):
 
     data = {'text': txt}
