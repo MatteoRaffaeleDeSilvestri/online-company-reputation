@@ -48,6 +48,9 @@ def training_pipeline():
     raw_dataset = Dataset.from_pandas(df)
     partitioned_dataset = raw_dataset.train_test_split(test_size = 0.3)
 
+    model.config.id2label = {0: 'Negative', 1: 'Neutral', 2: 'Positive'}
+    model.config.label2id = {'Negative': 0, 'Neutral': 1, 'Positive': 2}
+
     # Text tokenization and padding setup
     tokenized_data = partitioned_dataset.map(process_data_batch, batched = True)
     padding_collator = DataCollatorWithPadding(tokenizer = tokenizer)
