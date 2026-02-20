@@ -37,6 +37,7 @@ jobs:
     - name: Build model
       env:
         PYTHONPATH: ${{github.workspace}}/src
+      if: ${{env.RUN_TRAINING == 'true'}}
       run: |
         python src/train.py
     - name: Test with pytest
