@@ -19,8 +19,7 @@ HF_MODEL = 'cardiffnlp/twitter-roberta-base-sentiment-latest'
 # Initialize model and tokenizer
 model = AutoModelForSequenceClassification.from_pretrained(
     HF_MODEL,
-    num_labels = 3,
-    ignore_mismatched_sizes = True)
+    num_labels = 3)
 
 tokenizer = AutoTokenizer.from_pretrained(HF_MODEL)
 
