@@ -35,7 +35,7 @@ def process_data_batch(batch):
 def training_pipeline():
 
     # Datasets preparation
-    df = pd.read_csv('/content/datasets/product_reviews.csv', usecols = [0, 1])
+    df = pd.read_csv(f'{DATASET_DIR}/product_reviews.csv', usecols = [0, 1])
     df.columns = ['sentence', 'label']
     df['sentence'] = df['sentence'].str.lower().str.strip()
 
