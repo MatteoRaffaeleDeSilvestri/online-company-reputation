@@ -34,21 +34,23 @@ def process_data_batch(batch):
 def training_pipeline():
 
     # Datasets preparation
-    df = pd.read_csv(f'{DATASET_DIR}/product_reviews.csv', usecols = [0, 1])
+    df = pd.read_csv(f'{DATASET_DIR}/Dataset-SA.csv', usecols = [3, 5], engine='python')
     df.columns = ['sentence', 'label']
     df['sentence'] = df['sentence'].str.lower().str.strip()
 
-    mapping = {'Negative': 0, 'Neutral': 1, 'Positive': 2}
+    mapping = {'negative': 0, 'neutral': 1, 'positive': 2}
 
     df['label'] = df['label'].map(mapping)
     df = df.dropna(subset=['label'])
+    df['sentence'] = df['sentence'].astype(str)
+    df = df.dropna(subset=['sentence'])
     df['label'] = df['label'].astype(int)
 
     raw_dataset = Dataset.from_pandas(df)
     partitioned_dataset = raw_dataset.train_test_split(test_size = 0.3)
 
-    model.config.id2label = {0: 'Negative', 1: 'Neutral', 2: 'Positive'}
-    model.config.label2id = {'Negative': 0, 'Neutral': 1, 'Positive': 2}
+    model.config.id2label = {0: 'negative', 1: 'neutral', 2: 'positive'}
+    model.config.label2id = {'negative': 0, 'neutral': 1, 'positive': 2}
 
     # Text tokenization and padding setup
     tokenized_data = partitioned_dataset.map(process_data_batch, batched = True)
@@ -62,7 +64,8 @@ def training_pipeline():
         per_device_eval_batch_size = 64,
         warmup_steps = 500,
         weight_decay = 0.01,
-        eval_strategy = 'epoch')
+        eval_strategy = 'epoch'
+    )
 
     # Initialize trainer
     model_trainer = Trainer(
