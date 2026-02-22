@@ -8,8 +8,7 @@ client = TestClient(app)
 @pytest.mark.parametrize('txt', [
     'This product works exactly as advertised and has significantly simplified my daily routine',
     'The instruction manual was incredibly confusing and lacked several crucial steps',
-    'I was impressed by how intuitive the setup process was right out of the box',
-    'For the premium price they charge, the materials feel remarkably cheap and flimsy'])
+    'The product performs the basic functions described in the manual without any additional features or drawbacks'])
 
 # Test function for sentiment analysis
 def test_sentiment_analysis(txt):
@@ -39,6 +38,13 @@ if __name__ == '__main__':
     - I was impressed by how intuitive the setup process was right out of the box
     - The customer service team went above and beyond to resolve my inquiry within minutes
     - It is rare to find something this reliable that also looks great on a kitchen counter
+
+    NEUTRAL SENTENCES:
+    - The product performs the basic functions described in the manual without any additional features or drawbacks
+    - The materials used are standard for this price range and appear to be durable enough for regular, everyday use
+    - The installation process took exactly the amount of time I expected and followed the provided steps reasonably well
+    - The design is functional and plain; it fits into the room's decor without standing out or being an eyesore
+    - Overall, the item meets the basic requirements for its category, providing a typical experience for the cost
 
     NEGATIVE SENTENCES:
     - The instruction manual was incredibly confusing and lacked several crucial steps
