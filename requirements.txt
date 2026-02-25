@@ -1,6 +1,7 @@
 accelerate==1.12.0
 datasets==4.5.0
 fastapi==0.128.5
+kugglehub==1.0.0
 pandas==3.0.0
 prometheus_client==0.24.1
 pydantic==2.12.5
