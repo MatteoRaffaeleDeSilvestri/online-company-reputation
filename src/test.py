@@ -1,20 +1,43 @@
+'''
+API validation and testing setup: this file provides the testing framework to
+verify the integrity of the Sentiment Analysis model. It utilizes ad-hoc test 
+cases to evaluate model accuracy, API response structures and HTTP protocol compliance
+'''
+
+# LIBRARY IMPORT
 from fastapi.testclient import TestClient
 from main import app
 import pytest
 
-# Start app
+# SERVICE INITIALIZATION
 client = TestClient(app)
 
-@pytest.mark.parametrize('txt', [
-    'This product works exactly as advertised and has significantly simplified my daily routine',
-    'The instruction manual was incredibly confusing and lacked several crucial steps',
-    'The product performs the basic functions described in the manual without any additional features or drawbacks'])
+@pytest.mark.parametrize('txt, expected_label', [
+    ('This product works exactly as advertised and has significantly simplified my daily routine', 'positive'),
+    ('The instruction manual was incredibly confusing and lacked several crucial steps', 'negative'),
+    ('The product performs the basic functions described in the manual without any additional features or drawbacks', 'neutral')
+])
 
-# Test function for sentiment analysis
-def test_sentiment_analysis(txt):
+def test_sentiment_analysis(txt, expected_label):
+
+    '''
+    Execution logic for automated API endpoint validation
+    
+    Validates:
+        1. HTTP response status: ensures the /analyze endpoint returns a 200 OK status for valid requests
+        2. Data schema: verifies that the payload adheres to the expected list of label/score dictionaries
+        3. Type integrity: confirms the data types for classification outputs
+    
+    Args:
+        txt (str): the input sequence to be analyzed
+        expected_label (str): the declared sentiment category for comparison
+    
+    Returns:
+        tuple: the complete JSON response and the primary predicted label
+    '''
 
     data = {'text': txt}
-    response = client.post('/analyze', json=data)
+    response = client.post('/analyze', json = data)
 
     assert response.status_code == 200
     assert isinstance(response.json(), list)
@@ -24,9 +47,12 @@ def test_sentiment_analysis(txt):
         assert 'score' in item
         assert isinstance(item['label'], str)
         assert isinstance(item['score'], float)
-    
-    return response.json()
 
+    pred_lbl = max(response.json(), key=lambda x: x['score'])
+
+    return response.json(), pred_lbl['label']
+
+# MANUAL VERIFICATION AND DATA SAMPLE
 if __name__ == '__main__':
 
     '''
@@ -54,9 +80,12 @@ if __name__ == '__main__':
     - For the premium price they charge, the materials feel remarkably cheap and flimsy
     '''
 
-    txt = 'This product works exactly as advertised and has significantly simplified my daily routine'
-    sentiment_eval = test_sentiment_analysis(txt)
+    txt = 'Overall, the item meets the basic requirements for its category, providing a typical experience for the cost'
+    lbl = 'neutral'
+
+    sentiment_eval, pred_lbl = test_sentiment_analysis(txt, lbl)
     
     print(f'Sentiment analysis results for input: "{txt}"')
     for i in sentiment_eval:
         print(f"- {i['label']}: {i['score']:.4f}")
+    print(f'Expected label: {lbl}\nPredicted label: {pred_lbl}')
