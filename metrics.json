@@ -1,0 +1,5 @@
+{
+    "accuracy": 0.9524839066259184,
+    "f1_score": 0.8306522758396278,
+    "base_model": "cardiffnlp/twitter-roberta-base-sentiment-latest"
+}
