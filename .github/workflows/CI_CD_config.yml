@@ -8,6 +8,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      run_training:
+        description: 'Set true/false to execute/not execute model training'
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -35,9 +42,9 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Build model
+      if: ${{ github.event.inputs.run_training == 'true' }}
       env:
         PYTHONPATH: ${{github.workspace}}/src
-      if: ${{env.RUN_TRAINING == 'true'}}
       run: |
         python src/train.py
     - name: Test with pytest
