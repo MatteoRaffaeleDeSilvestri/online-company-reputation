@@ -5,7 +5,7 @@ It handles data acquisition, preprocessing and tokenization
 as well as model training and evaluation
 '''
 
-# Library import
+# LIBRARY IMPORT
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, TrainingArguments, Trainer, DataCollatorWithPadding
 from sklearn.metrics import accuracy_score, f1_score
 from datasets import Dataset
