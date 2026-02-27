@@ -15,8 +15,6 @@ The built model was finally released on **Hugging Face** and the project is also
 ├── .github/
 │   └── workflows/
 |        ├── CI_CD_config.yml
-├── datasets/
-│   ├── product_reviews.csv
 ├── src/
 │   ├── main.py
 │   ├── test.py
@@ -39,8 +37,6 @@ The built model was finally released on **Hugging Face** and the project is also
 * **src/train.py:** the script automates the fine-tuning of the **Twitter-RoBERTa** model using a custom dataset. It performs end-to-end data preprocessing, manages the training loop via the Hugging Face `Trainer` API, and exports both the optimized model weights and technical performance metrics (*Accuracy* and *F1-Score*) for version control;
 
 * **src/test.py:** the script implements **Automated Integration Testing** using the `pytest` framework and FastAPI's `TestClient`. It simulates real-user interactions by sending sample social media text to the API and verifying that the response matches the expected technical schema (labels and confidence scores);
-
-* **datasets/product_reviews.csv:** the `product_reviews.csv` file is a structured dataset containing user-generated text paired with sentiment classifications (*Positive*, *Neutral*, *Negative*). In the `train.py` script, this data is loaded via Pandas and converted into a Hugging Face `Dataset` object, forming the foundation for the model's ability to learn and classify online company reputation accurately. The original dataset can be found [here](https://www.kaggle.com/datasets/niraliivaghani/flipkart-product-customer-reviews-dataset).
 
 ### CI/CD pipeline
 
